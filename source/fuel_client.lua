@@ -1,4 +1,4 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = nil
 local isNearPump = nil
 local isFueling = false
 local currentFuel = 0.0
@@ -23,6 +23,7 @@ function ManageFuelUsage(vehicle)
 end
 
 CreateThread(function()
+
 	DecorRegister(Config.FuelDecor, 1)
 
 	for index = 1, #Config.Blacklist do
@@ -36,6 +37,11 @@ CreateThread(function()
 	for index = #Config.Blacklist, 1, -1 do
 		table.remove(Config.Blacklist, index)
 	end
+    
+    repeat
+        QBCore = exports['qb-core']:GetCoreObject()
+        Wait(1000)
+    until QBCore
 
 	while true do
 		Wait(1000)

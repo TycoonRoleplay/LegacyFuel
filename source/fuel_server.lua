@@ -1,4 +1,11 @@
-local QBCore = exports['qb-core']:GetCoreObject()
+local QBCore = nil
+
+CreateThread(function()
+    repeat
+        QBCore = exports['qb-core']:GetCoreObject()
+        Wait(100)
+    until QBCore
+end)
 
 RegisterNetEvent('fuel:pay', function(price)
 	local Player = QBCore.Functions.GetPlayer(source)
